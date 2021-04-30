@@ -9,7 +9,7 @@ package drinkgamecad;
  *
  * @author Jonathan Gonzalez Fraga
  */
-public class ExcepcionDG {
+public class ExcepcionDG extends Exception{
     
     String mensajeErrorUsuario;
     String mensajeErrorAdministrador;
