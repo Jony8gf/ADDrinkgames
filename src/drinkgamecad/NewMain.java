@@ -7,6 +7,7 @@ package drinkgamecad;
 
 import herramientas.Frase;
 import herramientas.Usuario;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,11 +24,13 @@ public class NewMain {
             } catch (ExcepcionDG ex) {
                 System.out.println(ex.getMensajeErrorAdministrador());
             }
-        Usuario usuario = new Usuario(0,"prueba3","prueba8gf@yopmail.com",10,"S",1,null) ;
+        Usuario usuario = new Usuario(101,"Saray","Sara@yopmail.com",100,"S",3,3) ;
         System.out.println(usuario.toString());
         Usuario aux = new Usuario();
-        Frase ff = new Frase(1, "Hola Bro", "YN", usuario);
-        Frase ff2 = new Frase(1, "Adios Bro", "YN", usuario);
+        Frase frase = new Frase(6, "Frase TT Valencia", "YN", usuario);
+        Frase fraseNeW = new Frase();
+        
+        ArrayList<Frase> frases = new ArrayList<>();
         int reg = 0;
         Integer id = 0;
         
@@ -38,11 +41,54 @@ public class NewMain {
             //reg = dgAd.eliminarUsuario(usuario.getCorreo());
             //System.out.println(reg);
             aux = dgAd.selectId(usuario.getCorreo());
-            System.out.println("El id es:"+aux.getId());
             System.out.println(aux.toString());
+            System.out.println("El id es:"+aux.getId());
+            
+            //reg = dgAd.eliminarFrasesDeUnUsuario(aux);
+            frases = dgAd.mostrarFrases(aux);
+            fraseNeW.setUsuario(aux);
+            
+            for(int i = 1; i<aux.frases.size(); i++){
+
+                          frases.set(i, fraseNeW);                       
+                    }
+            
+            aux.setFrases(frases);
+            aux.mostrarFrases();
+            
+                    for(int i = 1; i<aux.frases.size(); i++){
+
+                            reg = dgAd.modificarFrasesUsuario(aux, i);
+                            System.out.println("Registro Modificado");                        
+                    }
+            
+            
+            
+            
+            
+            
+            /*
+            frase.setDescripcion("Frase 3");
+            frase.setTipo("YN");
+            for(int i = 1; i<41; i++){
+                
+                frase.setDescripcion("Frase "+i);
+                
+                if(i<=20){
+                    frase.setTipo("MP");
+                    reg = dgAd.insertarFrasesUsuario(aux, frase);
+                }else{
+                    reg = dgAd.insertarFrasesUsuario(aux, frase);
+                    System.out.println("Registro Introducido");
+                }
+            }
+            */
+            
+            /*
             aux.anadirFrase(ff);
             aux.anadirFrase(ff2);
             aux.mostrarFrases();
+            */
             //System.out.println("\n Usuario insertado correctamente.");
             //System.out.println("\n Usuario modificado correctamente.");
 
