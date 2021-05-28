@@ -373,7 +373,7 @@ public class DrinkgamesAD {
         int registrosAfectados = 0;
        
         
-        String dml = "update frase set descripcion = ? , tipo = ?  where id = ? ";
+        String dml = "update frase set descripcion = ? , tipo = ?  where idusuario = ? and id = ? ";
 
         try {
 
@@ -382,6 +382,7 @@ public class DrinkgamesAD {
             sentenciaPreparada.setString(1, frases.get(i).getDescripcion());
             sentenciaPreparada.setString(2, frases.get(i).getTipo());
             sentenciaPreparada.setObject(3, usuario.getId(), Types.INTEGER);
+            sentenciaPreparada.setObject(4, frases.get(i).getId(), Types.INTEGER);
             
             registrosAfectados = sentenciaPreparada.executeUpdate();
 
