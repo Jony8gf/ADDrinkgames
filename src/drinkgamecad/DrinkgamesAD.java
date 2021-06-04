@@ -24,15 +24,18 @@ public class DrinkgamesAD {
 
     static String dml = null;
     Connection conexion;
+    String ip;
 
     /**
      * Método constructor vacio de la clase.
      *
+     * @param ip para indicar la direccion ip del servidor de base de datos
      * @throws drinkgamecad.ExcepcionDG Se lanzará cuando se produzca algún
      * problema al cargar el jdbc
      */
-    public DrinkgamesAD() throws ExcepcionDG {
+    public DrinkgamesAD(String ip) throws ExcepcionDG {
         try {
+            this.ip = ip;
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException ex) {
             ExcepcionDG exc = new ExcepcionDG();
@@ -50,8 +53,8 @@ public class DrinkgamesAD {
      */
     public void conectarBD() throws ExcepcionDG {
         try {
-            conexion = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.120:1521:test", "DRINKGAME", "kk");
-
+            conexion = DriverManager.getConnection("jdbc:oracle:thin:@"+ip+":1521:test", "DRINKGAME", "kk");
+            //conexion = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.120:1521:test", "DRINKGAME", "kk");
         } catch (SQLException ex) {
             ExcepcionDG exc = new ExcepcionDG();
             exc.setMensajeErrorAdministrador(ex.getMessage());
@@ -81,9 +84,16 @@ public class DrinkgamesAD {
         }
     }
 
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
     public int insertarUsuario(Usuario usuario) throws ExcepcionDG {
 
-        DrinkgamesAD dg = new DrinkgamesAD();
         conectarBD();
 
         String dml = "insert into Usuario (ID, NOMBRE, CORREO, CERVEZAS, ADS, AVATAR) values (SEQUENCE_USUARIO_ID.nextval, ?, ?, ?, ? , ?)";
@@ -139,7 +149,6 @@ public class DrinkgamesAD {
 
     public int modificarUsuario(Usuario usuario) throws ExcepcionDG {
 
-        DrinkgamesAD dg = new DrinkgamesAD();
         conectarBD();
 
         String dml = "UPDATE USUARIO SET NOMBRE = ?, CORREO = ?, CERVEZAS = ?, ADS = ?, AVATAR  = ? WHERE CORREO LIKE ?";
@@ -197,8 +206,6 @@ public class DrinkgamesAD {
     }
 
     public int eliminarUsuario(String correo) throws ExcepcionDG {
-
-        DrinkgamesAD dg = new DrinkgamesAD();
 
         conectarBD();
         String dml = "DELETE FROM USUARIO WHERE CORREO LIKE '" + correo + "' ";
@@ -278,7 +285,6 @@ public class DrinkgamesAD {
     //Crear Frases
     public int insertarFrasesUsuario(Usuario usuario, Frase frase) throws ExcepcionDG {
 
-        DrinkgamesAD dg = new DrinkgamesAD();
         conectarBD();
         
         int registrosAfectados = 0;
@@ -325,8 +331,6 @@ public class DrinkgamesAD {
 
     public int eliminarFrasesDeUnUsuario(Usuario usuario) throws ExcepcionDG {
 
-        DrinkgamesAD dg = new DrinkgamesAD();
-
         conectarBD();
         String dml = "DELETE FROM FRASE WHERE IDUSUARIO = " + usuario.getId();
         int registrosAfectados;
@@ -364,7 +368,6 @@ public class DrinkgamesAD {
     
     public int modificarFrasesUsuario(Usuario usuario, int i) throws ExcepcionDG {
 
-        DrinkgamesAD dg = new DrinkgamesAD();
         conectarBD();
         
         ArrayList<Frase> frases = new ArrayList<>();
