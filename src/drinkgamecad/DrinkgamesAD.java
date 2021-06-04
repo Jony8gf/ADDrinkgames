@@ -84,14 +84,22 @@ public class DrinkgamesAD {
         }
     }
 
+    //Get de Ip --> Que devuelve la Ip del Objeto DrinkGamesAd
     public String getIp() {
         return ip;
     }
 
+    //Set de Ip --> Que modifica la Ip del Objeto DrinkGamesAd
     public void setIp(String ip) {
         this.ip = ip;
     }
 
+    /**
+     * Metodo que sirve para la creacion de un Usuario en la base de datos
+     * @param usuario se pasa un Objeto de tipo Usuario para coger sus elementos/datos 
+     * @return retorna un entero con el numero de registros afectados
+     * @throws ExcepcionDG
+     */
     public int insertarUsuario(Usuario usuario) throws ExcepcionDG {
 
         conectarBD();
@@ -147,6 +155,12 @@ public class DrinkgamesAD {
         return registrosAfectados;
     }
 
+    /**
+     * Este Metodo sirve para modificar los datos de un Usuario de la base de datos
+     * @param usuario se pasa un Objeto de tipo Usuario para coger sus elementos/datos 
+     * @return devuelve un entero con el numero de registros afectados
+     * @throws ExcepcionDG
+     */
     public int modificarUsuario(Usuario usuario) throws ExcepcionDG {
 
         conectarBD();
@@ -205,6 +219,12 @@ public class DrinkgamesAD {
         return registrosAfectados;
     }
 
+    /**
+     * Metodo que srive para eliminar un Usuario
+     * @param correo correo se pasa un String con la direccion de correo del Usuario
+     * @return devulve los numeros de registros afectados
+     * @throws ExcepcionDG
+     */
     public int eliminarUsuario(String correo) throws ExcepcionDG {
 
         conectarBD();
@@ -242,6 +262,12 @@ public class DrinkgamesAD {
         return registrosAfectados;
     }
 
+    /**
+     * Este método sirve para seleccionar el Id de un Usuario
+     * @param correo se pasa un String con la direccion de correo del Usuario
+     * @return devulve un objeto tipo Usuario con todos sus datos de la base de datos
+     * @throws ExcepcionDG
+     */
     public Usuario selectId(String correo) throws ExcepcionDG {
 
         Usuario usuario = new Usuario();
@@ -282,7 +308,13 @@ public class DrinkgamesAD {
         return usuario;
     }
 
-    //Crear Frases
+    /**
+     * Este metodo sirve para insertar Frases por defecto al Usuario
+     * @param usuario se pasa un Objeto de tipo Usuario para coger su Id y sus Frases de su ArrayList
+     * @param frase se pasa una Objeto tipo Frase para introducir sus valores
+     * @return retorna un entero con los registros afectados
+     * @throws ExcepcionDG
+     */
     public int insertarFrasesUsuario(Usuario usuario, Frase frase) throws ExcepcionDG {
 
         conectarBD();
@@ -329,6 +361,12 @@ public class DrinkgamesAD {
         return registrosAfectados;
     }
 
+    /**
+     * Metodo que sirve para borrar todas las frases de un usuario
+     * @param usuario se pasa un Objeto de tipo Usuario para coger su Id
+     * @return devuelve un entero de los registroa afectados
+     * @throws ExcepcionDG
+     */
     public int eliminarFrasesDeUnUsuario(Usuario usuario) throws ExcepcionDG {
 
         conectarBD();
@@ -366,6 +404,13 @@ public class DrinkgamesAD {
         return registrosAfectados;
     }
     
+    /**
+     * Este Metodo sirvee para Modificar las frases de un Usuario Autenticado
+     * @param usuario  se pasa un Objeto de tipo Usuario para coger su Id y su frases de su ArrayList
+     * @param i Funciona como iterador
+     * @return Devuelve un entero de los numeros de registros afectados
+     * @throws ExcepcionDG
+     */
     public int modificarFrasesUsuario(Usuario usuario, int i) throws ExcepcionDG {
 
         conectarBD();
@@ -417,7 +462,12 @@ public class DrinkgamesAD {
         return registrosAfectados;
     }
     
-    
+    /**
+     * Metodo para Mostrar Frases de un Usuario
+     * @param usuario se pasa un Objeto de tipo Usuario para coger su Id
+     * @return Devuelve una ArrayList con las frases del Usuario
+     * @throws ExcepcionDG
+     */
     public ArrayList<Frase> mostrarFrases(Usuario usuario) throws ExcepcionDG{
         
         
